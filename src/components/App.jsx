@@ -1,3 +1,7 @@
+import { Routes, Route } from 'react-router-dom';
+
+import { Home } from './Home/Home';
+
 export const App = () => {
   return (
     <div
@@ -7,10 +11,12 @@ export const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
-        color: '#010101'
+        color: '#010101',
       }}
     >
-      React homework template
+      <Routes>
+        <Route path="/home" element={<Home />} />
+      </Routes>
     </div>
   );
 };
