@@ -16,7 +16,9 @@ export const Home = () => {
       <ul>
         {trendingMovies.map(movie => (
           <li key={movie.id}>
-            <p>{movie.title}</p>
+            <Link to={`/movies/${movie.id}`}>
+              <p>{movie.title}</p>
+            </Link>
           </li>
         ))}
       </ul>

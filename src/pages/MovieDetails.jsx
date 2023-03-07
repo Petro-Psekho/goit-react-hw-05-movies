@@ -1,10 +1,28 @@
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { getMovieDetails } from 'services/fetchMovies ';
 
-import { fetchMovies } from 'services/fetchMovies ';
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
+const IMAGE_POSTER_SIZES = '/w342/';
 
-// fetchMovies().then(resp => console.log(resp.results));
-
-const MovieDetails = () => {
+export const MovieDetails = () => {
+  const [movieDetails, setMovieDetails] = useState([]);
   const { movieId } = useParams();
-  return <div>Now showing product with id - {movieId}</div>;
+
+  useEffect(() => {
+    getMovieDetails(movieId).then(data => {
+      setMovieDetails(data);
+    });
+  }, [movieId]);
+
+  return (
+    <main>
+      {
+        <img
+          src={`${IMAGE_BASE_URL}${IMAGE_POSTER_SIZES}${movieDetails.poster_path}`}
+          alt=""
+        />
+      }
+    </main>
+  );
 };
