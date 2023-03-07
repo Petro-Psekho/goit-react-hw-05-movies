@@ -12,7 +12,6 @@ export const Cast = () => {
 
   useEffect(() => {
     getMovieCredits(movieId).then(data => {
-      console.log(data.cast);
       setMovieCredits(data);
     });
   }, [movieId]);
