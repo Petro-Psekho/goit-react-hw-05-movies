@@ -53,6 +53,7 @@ export const MovieDetails = () => {
             <Link to="reviews">Reviews</Link>
           </li>
         </ul>
+        <p>_____________________________________________________________</p>
         <Outlet />
       </div>
     </main>
