@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/fetchMovies ';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
