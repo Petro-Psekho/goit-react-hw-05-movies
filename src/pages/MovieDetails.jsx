@@ -11,7 +11,6 @@ export const MovieDetails = () => {
 
   useEffect(() => {
     getMovieDetails(movieId).then(data => {
-      console.log(data.genres);
       setMovieDetails(data);
     });
   }, [movieId]);
