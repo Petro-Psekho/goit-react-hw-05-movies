@@ -29,7 +29,7 @@ export const Cast = () => {
                     ? `${IMAGE_BASE_URL}${IMAGE_POSTER_SIZES}${credits.profile_path}`
                     : `${noImage}`
                 }
-                alt=""
+                alt={credits.character}
               />
               <h4>{credits.name}</h4>
               <p>{credits.character}</p>

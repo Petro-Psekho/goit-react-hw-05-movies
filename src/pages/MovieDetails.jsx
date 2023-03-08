@@ -11,6 +11,7 @@ export const MovieDetails = () => {
 
   useEffect(() => {
     getMovieDetails(movieId).then(data => {
+      console.log(data);
       setMovieDetails(data);
     });
   }, [movieId]);
@@ -22,7 +23,7 @@ export const MovieDetails = () => {
           {
             <img
               src={`${IMAGE_BASE_URL}${IMAGE_POSTER_SIZES}${movieDetails.poster_path}`}
-              alt=""
+              alt={movieDetails.original_title}
             />
           }
         </div>
@@ -36,7 +37,7 @@ export const MovieDetails = () => {
             {movieDetails.genres &&
               movieDetails.genres.length &&
               movieDetails.genres.map(({ id, name }) => (
-                <span key={id}>/ {name} /</span>
+                <span key={id}>{name}</span>
               ))}
           </div>
         </div>

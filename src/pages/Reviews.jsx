@@ -14,14 +14,16 @@ export const Reviews = () => {
 
   return (
     <ul>
-      {movieReviews.length > 0
-        ? movieReviews.map(({ author, content, id }) => (
-            <li key={id}>
-              <h3>{author}</h3>
-              <p>{content}</p>
-            </li>
-          ))
-        : 'Something will appear here soon'}
+      {movieReviews.length > 0 ? (
+        movieReviews.map(({ author, content, id }) => (
+          <li key={id}>
+            <h3>{author}</h3>
+            <p>{content}</p>
+          </li>
+        ))
+      ) : (
+        <li>Something will appear here soon</li>
+      )}
     </ul>
   );
 };
