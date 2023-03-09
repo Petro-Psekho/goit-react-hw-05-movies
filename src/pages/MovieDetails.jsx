@@ -20,7 +20,10 @@ export const MovieDetails = () => {
 
   return (
     <main>
-      <BackLink to={backLinkHref}>Back to products</BackLink>
+      {' '}
+      {location.state !== null && (
+        <BackLink to={backLinkHref}>Back to products</BackLink>
+      )}
       <div>
         <div>
           {

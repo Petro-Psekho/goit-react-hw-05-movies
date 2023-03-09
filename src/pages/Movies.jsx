@@ -19,8 +19,6 @@ export const Movies = () => {
   const query = searchParams.get('query');
   const location = useLocation();
 
-  console.log(location);
-
   useEffect(() => {
     if (!query) {
       return;
