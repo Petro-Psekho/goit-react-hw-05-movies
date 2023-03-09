@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
 
 import {
   Container,
@@ -18,7 +20,9 @@ export const SharedLayout = () => {
           <StyledLink to="/movies">Movies</StyledLink>
         </NavList>
       </header>
-      <Outlet />
+      <Suspense fallback={<LoaderSpinner />}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/fetchMovies ';
 import { BackLink } from 'components/BackLink/BackLink';
@@ -6,7 +6,7 @@ import { BackLink } from 'components/BackLink/BackLink';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const IMAGE_POSTER_SIZES = '/w342/';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
   const { movieId } = useParams();
   const location = useLocation();
@@ -61,8 +61,12 @@ export const MovieDetails = () => {
           </li>
         </ul>
         <p>_____________________________________________________________</p>
-        <Outlet />
+        <Suspense fallback={<div>Loading subpage...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
     </main>
   );
 };
+
+export default MovieDetails;

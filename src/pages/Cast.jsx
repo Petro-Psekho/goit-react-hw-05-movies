@@ -6,7 +6,7 @@ import noImage from 'img/stub.jpg';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const IMAGE_POSTER_SIZES = '/w154/';
 
-export const Cast = () => {
+const Cast = () => {
   const [movieCredits, setMovieCredits] = useState([]);
   const { movieId } = useParams();
 
@@ -39,3 +39,5 @@ export const Cast = () => {
     </div>
   );
 };
+
+export default Cast;

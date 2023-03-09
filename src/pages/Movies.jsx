@@ -5,7 +5,7 @@ import { useSearchParams, useLocation, Link } from 'react-router-dom';
 
 import { getMovies } from 'services/fetchMovies ';
 
-export const Movies = () => {
+const Movies = () => {
   const {
     register,
     handleSubmit,
@@ -61,3 +61,5 @@ export const Movies = () => {
     </main>
   );
 };
+
+export default Movies;
