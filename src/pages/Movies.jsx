@@ -1,32 +1,8 @@
-// import { useNavigate } from 'react-router-dom';
-// import { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { getMovies } from 'services/fetchMovies ';
-
-// export const Movies = () => {
-//   const [foundMovies, setFoundMovies] = useState([]);
-//   const navigate = useNavigate();
-//   const { query } = useParams();
-
-//   const handleSubmit = async values => {
-//     const response = getMovies(query).then(data => {
-//       setFoundMovies(data.results);
-//     });
-//     if (response.success) {
-//       navigate('/movies', { replace: false });
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <input onSubmit={handleSubmit} />
-//     </div>
-//   );
-// };
-
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { useSearchParams, useLocation, Link } from 'react-router-dom';
+
 import { getMovies } from 'services/fetchMovies ';
 
 export const Movies = () => {
@@ -34,20 +10,33 @@ export const Movies = () => {
     register,
     handleSubmit,
     formState: { errors },
-
     reset,
   } = useForm();
 
-  // const onSubmit = data => console.log(data);
-  const onSubmit = async data => {
-    console.log(Object.values(data));
+  const [searchMovies, setSearchMovies] = useState([]);
 
-    const query = Object.values(data);
-    const response = await getMovies(query);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query');
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!query) {
+      return;
+    }
+
+    getMovies(query)
+      .then(data => {
+        setSearchMovies(data.results);
+      })
+      .catch(error => console.log(error));
+  }, [query]);
+
+  const onSubmit = data => {
+    data = Object.values(data);
+
+    setSearchParams({ query: data });
 
     reset();
-
-    console.log(response.results);
   };
 
   return (
@@ -60,15 +49,15 @@ export const Movies = () => {
         <button type="submit">Search</button>
       </form>
 
-      {/* <ul>
-        {trendingMovies.map(movie => (
+      <ul>
+        {searchMovies.map(movie => (
           <li key={movie.id}>
             <Link to={`/movies/${movie.id}`}>
               <p>{movie.title}</p>
             </Link>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </main>
   );
 };
