@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/fetchMovies ';
 import { BackLink } from 'components/BackLink/BackLink';
+import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const IMAGE_POSTER_SIZES = '/w342/';
@@ -11,10 +12,13 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getMovieDetails(movieId).then(data => {
       setMovieDetails(data);
+      setIsLoading(false);
     });
   }, [movieId]);
 
@@ -22,6 +26,7 @@ const MovieDetails = () => {
     <main>
       <BackLink to={backLinkHref}>Go back</BackLink>
       <div>
+        {isLoading && <LoaderSpinner />}
         <div>
           {
             <img
