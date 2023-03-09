@@ -1,17 +1,16 @@
-import { Puff } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
 
 export const LoaderSpinner = () => {
   return (
     <div>
-      <Puff
+      <ProgressBar
         height="80"
         width="80"
-        radius={1}
-        color="orangered"
-        ariaLabel="puff-loading"
+        ariaLabel="progress-bar-loading"
         wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
+        wrapperClass="progress-bar-wrapper"
+        borderColor="#F4442E"
+        barColor="orangered"
       />
     </div>
   );
