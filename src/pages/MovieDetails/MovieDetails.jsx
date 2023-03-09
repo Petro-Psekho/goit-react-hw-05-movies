@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense } from 'react';
-import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/fetchMovies ';
 import { BackLink } from 'components/BackLink/BackLink';
 import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
