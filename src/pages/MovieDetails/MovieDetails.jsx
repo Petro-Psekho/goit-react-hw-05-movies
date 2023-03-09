@@ -3,6 +3,23 @@ import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/fetchMovies ';
 import { BackLink } from 'components/BackLink/BackLink';
 import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
+import {
+  MainDetails,
+  DetailsWrap,
+  PosterWrap,
+  PosterImage,
+  DetailsTitle,
+  DetailsScore,
+  OverviewTitle,
+  OverviewText,
+  GenresTitle,
+  GenresText,
+  InfoWrap,
+  InfoTitle,
+  InfoList,
+  InfoListItem,
+  InfoLink,
+} from 'pages/MovieDetails/MovieDetails.styled';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const IMAGE_POSTER_SIZES = '/w342/';
@@ -23,54 +40,55 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <main>
+    <MainDetails>
       <BackLink to={backLinkHref}>Go back</BackLink>
-      <div>
+      <DetailsWrap>
         {isLoading && <LoaderSpinner />}
-        <div>
+        <PosterWrap>
           {
-            <img
+            <PosterImage
               src={`${IMAGE_BASE_URL}${IMAGE_POSTER_SIZES}${movieDetails.poster_path}`}
               alt={movieDetails.original_title}
             />
           }
-        </div>
+        </PosterWrap>
         <div>
-          <h2>{movieDetails.title}</h2>
-          <p>User Score: {Math.round(movieDetails.vote_average * 10)}%</p>
-          <h3>Overview</h3>
-          <p>{movieDetails.overview}</p>
-          <h4>Genres</h4>
+          <DetailsTitle>{movieDetails.title}</DetailsTitle>
+          <DetailsScore>
+            User Score: {Math.round(movieDetails.vote_average * 10)}%
+          </DetailsScore>
+          <OverviewTitle>Overview</OverviewTitle>
+          <OverviewText>{movieDetails.overview}</OverviewText>
+          <GenresTitle>Genres</GenresTitle>
           <div>
             {movieDetails.genres &&
               movieDetails.genres.length &&
               movieDetails.genres.map(({ id, name }) => (
-                <span key={id}>{name}</span>
+                <GenresText key={id}> "{name}" </GenresText>
               ))}
           </div>
         </div>
-      </div>
-      <div>
-        <p>_____________________________________________________________</p>
-        <h4>Additional information</h4>
-        <ul>
-          <li>
-            <Link to="cast" state={{ ...location.state }}>
+      </DetailsWrap>
+      <InfoWrap>
+        <InfoTitle>Additional information</InfoTitle>
+        <InfoList>
+          <InfoListItem>
+            <InfoLink to="cast" state={{ ...location.state }}>
               Cast
-            </Link>
-          </li>
-          <li>
-            <Link to="reviews" state={{ ...location.state }}>
+            </InfoLink>
+          </InfoListItem>
+          <InfoListItem>
+            <InfoLink to="reviews" state={{ ...location.state }}>
               Reviews
-            </Link>
-          </li>
-        </ul>
-        <p>_____________________________________________________________</p>
+            </InfoLink>
+          </InfoListItem>
+        </InfoList>
+
         <Suspense fallback={<div>Loading subpage...</div>}>
           <Outlet />
         </Suspense>
-      </div>
-    </main>
+      </InfoWrap>
+    </MainDetails>
   );
 };
 

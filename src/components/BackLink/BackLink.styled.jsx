@@ -6,7 +6,8 @@ export const StyledLink = styled(Link)`
   align-items: center;
   gap: 4px;
   padding: 8px 0;
-  color: #494949;
+  margin-bottom: 16px;
+  color: #474747;
   text-decoration: none;
   font-weight: 500;
   text-transform: uppercase;

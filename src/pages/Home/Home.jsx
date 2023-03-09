@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getTrending } from 'services/fetchMovies ';
 import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
+import { GiFilmSpool } from 'react-icons/gi';
+import {
+  MainTrend,
+  TrendList,
+  TrendListItem,
+  TrendListItemLink,
+  ItemLinkName,
+} from 'pages/Home/Home.styled';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -17,18 +25,22 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
-      <ul>
+    <MainTrend>
+      <TrendList>
         {isLoading && <LoaderSpinner />}
         {trendingMovies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-              <p>{movie.title}</p>
-            </Link>
-          </li>
+          <TrendListItem key={movie.id}>
+            <TrendListItemLink
+              to={`/movies/${movie.id}`}
+              state={{ from: location }}
+            >
+              <GiFilmSpool size="20" fill="#999898" />
+              <ItemLinkName>{movie.title}</ItemLinkName>
+            </TrendListItemLink>
+          </TrendListItem>
         ))}
-      </ul>
-    </main>
+      </TrendList>
+    </MainTrend>
   );
 };
 

@@ -7,13 +7,18 @@ export const Container = styled.div`
 `;
 
 export const NavList = styled.nav`
-  padding: 5px 0;
-  margin-bottom: 10px;
+  padding: 15px 5px;
+  margin-bottom: 20px;
+  /* border-bottom: 1px solid #e6e4e4; */
+  box-shadow: 0 10px 12px -12px rgba(0, 0, 0, 0.6);
 `;
 
 export const StyledLink = styled(NavLink)`
-  color: black;
+  text-decoration: none;
+  font-size: 20px;
+  color: #474747;
   margin-right: 20px;
+  margin-left: 10px;
 
   &.active {
     color: orange;
