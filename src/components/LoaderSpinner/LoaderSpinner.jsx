@@ -9,8 +9,8 @@ export const LoaderSpinner = () => {
         ariaLabel="progress-bar-loading"
         wrapperStyle={{}}
         wrapperClass="progress-bar-wrapper"
-        borderColor="#F4442E"
-        barColor="orangered"
+        borderColor="#FF4500"
+        barColor="#FFa500"
       />
     </div>
   );
