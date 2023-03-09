@@ -19,6 +19,8 @@ export const Movies = () => {
   const query = searchParams.get('query');
   const location = useLocation();
 
+  console.log(location);
+
   useEffect(() => {
     if (!query) {
       return;
@@ -52,7 +54,7 @@ export const Movies = () => {
       <ul>
         {searchMovies.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
+            <Link to={`${movie.id}`} state={{ from: location }}>
               <p>{movie.title}</p>
             </Link>
           </li>

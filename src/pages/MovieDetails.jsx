@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams, Outlet, Link } from 'react-router-dom';
+import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/fetchMovies ';
+import { BackLink } from 'components/BackLink/BackLink';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const IMAGE_POSTER_SIZES = '/w342/';
@@ -8,16 +9,18 @@ const IMAGE_POSTER_SIZES = '/w342/';
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     getMovieDetails(movieId).then(data => {
-      console.log(data);
       setMovieDetails(data);
     });
   }, [movieId]);
 
   return (
     <main>
+      <BackLink to={backLinkHref}>Back to products</BackLink>
       <div>
         <div>
           {
