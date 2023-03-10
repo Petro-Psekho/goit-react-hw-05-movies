@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { GiFilmSpool } from 'react-icons/gi';
 
 import { getMovies } from 'services/fetchMovies ';
@@ -20,7 +21,7 @@ const Movies = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
     reset,
   } = useForm();
 
@@ -34,9 +35,15 @@ const Movies = () => {
     if (!query) {
       return;
     }
+
     setIsLoading(true);
+
     getMovies(query)
       .then(data => {
+        if (data.results.length === 0) {
+          toast.error('Try asking something else');
+        }
+
         setSearchMovies(data.results);
         setIsLoading(false);
       })
@@ -46,8 +53,12 @@ const Movies = () => {
   const onSubmit = data => {
     data = Object.values(data);
 
-    setSearchParams({ query: data });
+    if (!data[0]) {
+      toast.error('This field is required');
+      return;
+    }
 
+    setSearchParams({ query: data });
     reset();
   };
 
@@ -56,10 +67,10 @@ const Movies = () => {
       <MoviesForm onSubmit={handleSubmit(onSubmit)}>
         <MoviesFormInput
           autoComplete="off"
-          {...register('query', { required: true })}
+          {...register('query', { required: false })}
         />
 
-        {errors.query && <span>This field is required</span>}
+        {/* {errors.query && <span>This field is required</span>} */}
 
         <FormInputButton type="submit">Search</FormInputButton>
       </MoviesForm>

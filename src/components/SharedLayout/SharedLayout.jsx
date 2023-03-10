@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
+import { Toaster } from 'react-hot-toast';
 
 import {
   Container,
@@ -23,6 +24,7 @@ export const SharedLayout = () => {
       <Suspense fallback={<LoaderSpinner />}>
         <Outlet />
       </Suspense>
+      <Toaster />
     </Container>
   );
 };
