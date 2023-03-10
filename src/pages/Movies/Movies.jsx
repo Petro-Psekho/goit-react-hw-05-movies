@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { useSearchParams, useLocation, Link } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
+import { GiFilmSpool } from 'react-icons/gi';
 
 import { getMovies } from 'services/fetchMovies ';
 import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
@@ -9,6 +10,10 @@ import {
   MoviesForm,
   MoviesFormInput,
   FormInputButton,
+  MoviesList,
+  MoviesListItem,
+  MoviesListItemLink,
+  MoviesItemLinkName,
 } from 'pages/Movies/Movies.styled';
 
 const Movies = () => {
@@ -58,17 +63,20 @@ const Movies = () => {
 
         <FormInputButton type="submit">Search</FormInputButton>
       </MoviesForm>
+      {isLoading && <LoaderSpinner />}
 
-      <ul>
-        {isLoading && <LoaderSpinner />}
-        {searchMovies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`${movie.id}`} state={{ from: location }}>
-              <p>{movie.title}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {searchMovies.length > 0 && (
+        <MoviesList>
+          {searchMovies.map(movie => (
+            <MoviesListItem key={movie.id}>
+              <MoviesListItemLink to={`${movie.id}`} state={{ from: location }}>
+                <GiFilmSpool size="20" fill="#999898" />
+                <MoviesItemLinkName>{movie.title}</MoviesItemLinkName>
+              </MoviesListItemLink>
+            </MoviesListItem>
+          ))}
+        </MoviesList>
+      )}
     </MainMovies>
   );
 };

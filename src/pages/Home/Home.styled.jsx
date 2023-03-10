@@ -12,7 +12,7 @@ export const TrendList = styled.ul`
 
 export const TrendListItem = styled.li`
   font-size: 16px;
-  padding: 10px 0;
+  padding: 6px 0;
 `;
 
 export const TrendListItemLink = styled(Link)`
