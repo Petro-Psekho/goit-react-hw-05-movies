@@ -1,8 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useLocation, Link } from 'react-router-dom';
+
 import { getMovies } from 'services/fetchMovies ';
 import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
+import {
+  MainMovies,
+  MoviesForm,
+  MoviesFormInput,
+  FormInputButton,
+} from 'pages/Movies/Movies.styled';
 
 const Movies = () => {
   const {
@@ -40,14 +47,17 @@ const Movies = () => {
   };
 
   return (
-    <main>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input autoComplete="off" {...register('query', { required: true })} />
+    <MainMovies>
+      <MoviesForm onSubmit={handleSubmit(onSubmit)}>
+        <MoviesFormInput
+          autoComplete="off"
+          {...register('query', { required: true })}
+        />
 
         {errors.query && <span>This field is required</span>}
 
-        <button type="submit">Search</button>
-      </form>
+        <FormInputButton type="submit">Search</FormInputButton>
+      </MoviesForm>
 
       <ul>
         {isLoading && <LoaderSpinner />}
@@ -59,7 +69,7 @@ const Movies = () => {
           </li>
         ))}
       </ul>
-    </main>
+    </MainMovies>
   );
 };
 

@@ -34,6 +34,7 @@ export const DetailsTitle = styled.h2`
 
 export const DetailsScore = styled.p`
   margin-bottom: 14px;
+  font-style: italic;
   color: orange;
 `;
 
